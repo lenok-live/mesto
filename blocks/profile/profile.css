@@ -7,10 +7,15 @@
   justify-content: space-between;
 }
 
+@media screen and (max-width: 1000px) {
+  .profile {
+    max-width: 700px;
+  }
+}
 @media screen and (max-width: 720px) {
   .profile {
     display: block;
     max-width: 282px;
-    font-size: 0px; /*чтобы избавиться от пустого пространства между avatar и info*/
+    font-size: 0px;  /*чтобы избавиться от пустого пространства между avatar и info*/
   }
 }

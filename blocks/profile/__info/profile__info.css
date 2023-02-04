@@ -1,15 +1,17 @@
 .profile__info {
-  width: 530px;
-  height: 100%;
-  display: flex;
-  align-content: flex-start;
-  flex-wrap: wrap;
+  display: grid;
+  gap: 12px 18px;
+  grid-template-columns: 294px 24px;
+  grid-template-areas:
+  "title btn"
+  "subttl subttl";
   margin: 22px auto 25px 30px;
 }
 
 @media screen and (max-width: 720px) {
   .profile__info {
-    width: 282px;
+    grid-template-columns: 235px 36px;
+    gap: 6px 10px;
     margin: 0 auto;
   }
 }

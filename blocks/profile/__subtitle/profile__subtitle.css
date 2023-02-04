@@ -8,6 +8,7 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+  grid-area: subttl;
 }
 
 @media screen and (max-width: 720px) {
@@ -16,6 +17,5 @@
     line-height: 17px;
     width: 100%;
     text-align: center;
-    margin-top: 14px;
   }
 }
