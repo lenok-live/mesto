@@ -1,0 +1,16 @@
+.profile {
+  max-width: 880px;
+  min-height: 120px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@media screen and (max-width: 720px) {
+  .profile {
+    display: block;
+    max-width: 282px;
+    font-size: 0px; /*чтобы избавиться от пустого пространства между avatar и info*/
+  }
+}

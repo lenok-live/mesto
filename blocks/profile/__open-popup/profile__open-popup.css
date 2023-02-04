@@ -1,0 +1,27 @@
+.profile__open-popup {
+  width: 24px;
+  height: 24px;
+  margin: 15px 0 auto 0;
+  background-repeat: no-repeat;
+  background-color: black;
+  border: 1px solid #FFFFFF;
+  background-image: url(../../../images/pencil.svg);
+  background-position: center;
+  cursor: pointer;
+  padding: 0;
+}
+
+.profile__open-popup:hover {
+  opacity: 0.6;
+}
+
+@media screen and (max-width: 720px) {
+  .profile__open-popup {
+    width: 18px;
+    height: 18px;
+    padding: 0;
+    margin-top: 8px;
+    margin-right: 19px;
+    margin-bottom: 0;
+  }
+}
