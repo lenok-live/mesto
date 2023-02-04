@@ -32,4 +32,4 @@
 
 **GitHub Pages**
 
-- [Ссылка на GitHub Pages](https://lenok-live.github.io/russian-travel/)
+- [Ссылка на GitHub Pages](https://lenok-live.github.io/mesto/)
