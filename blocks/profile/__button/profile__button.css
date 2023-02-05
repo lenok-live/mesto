@@ -22,5 +22,6 @@
   .profile__button {
     width: 100%;
     margin-top: 34px;
+    background-image: url(../../../images/plus_small.svg);
   }
 }

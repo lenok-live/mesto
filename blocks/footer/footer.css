@@ -2,3 +2,9 @@
   min-height: min-content;
   padding-bottom: 60px;
 }
+
+@media screen and (max-width: 720px) {
+  .footer {
+    padding-bottom: 36px;
+  }
+}
