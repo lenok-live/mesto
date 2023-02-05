@@ -6,6 +6,8 @@
   background-color: rgb(255, 255, 255);
   padding: 0;
   cursor: pointer;
+  margin-right: 5px;
+  margin-top: 5px;
 }
 
 .element__btn-like:hover {
