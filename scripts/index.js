@@ -84,6 +84,7 @@ function addNewCard (evt) {
   evt.target.reset();
 
   elements.prepend(card);
+  closePopup(addCardForm);
 }
 
 //Создать карточку
