@@ -47,6 +47,25 @@ const zoomImage = document.querySelector('.popup__img');
 const titleZoomImage = document.querySelector('.popup__title-img');
 const closeButtons = document.querySelectorAll('.popup__close-button');
 
+const options = {
+  formSelector: '.popup',
+  submitSelector: '.popup__save-button',
+  inputSelector: '.popup__input',
+  inputSectionSelector: '.popup__section',
+  inputErrorSelector: '.popup__input-error',
+  inputErrorClass: 'popup__input-error_active',
+  disabledButtonClass: 'popup__save-button_inactive',
+}
+
+//закрыть попап по нажатию на оверлей
+const popup = document.querySelectorAll('.popup').forEach(item => {
+  item.addEventListener('click', (evt) => {
+    if(evt.target === evt.currentTarget) {
+      closePopup(item)
+    }
+  })
+});
+
 //Воспроизвести карточки «из коробки»
 function renderCards(items) {
   const cards = items.map((item) => {
@@ -133,3 +152,5 @@ closeButtons.forEach((button) => {
   const popup = button.closest('.popup');
   button.addEventListener('click', () => closePopup(popup));
 });
+
+enableValidation(options);
