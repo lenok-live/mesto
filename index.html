@@ -41,15 +41,17 @@
   <div class="popup popup_edit">
     <div class="popup__container">
       <button class="popup__close-button" type="button" aria-label="Закрыть окно"></button>
-      <h2 class="popup__title">Редактировать профиль</h2>
-      <form class="popup__form popup__form_edit" name="form-name" autocomplete="on" >
+      <form class="popup__form popup__form_edit" name="form-name" autocomplete="on">
+        <h2 class="popup__title">Редактировать профиль</h2>
         <div class="popup__section">
-          <input class="popup__input popup__input_type_name" type="text" name="name" id="name" placeholder="Имя" required minlength="2" maxlength="40">
-          <span class="popup__input-error popup__input-error_active" id="username-error"></span>
+          <input class="popup__input popup__input_type_name" type="text" name="name" id="name" placeholder="Имя"
+            required minlength="2" maxlength="40">
+          <span class="popup__input-error popup__input_invalid" id="username-error"></span>
         </div>
         <div class="popup__section">
-          <input class="popup__input popup__input_type_profession" type="text" name="job" id="job" placeholder="Профессия" required minlength="2" maxlength="200">
-          <span class="popup__input-error popup__input-error_active" id="description-error"></span>
+          <input class="popup__input popup__input_type_profession" type="text" name="job" id="job"
+            placeholder="Профессия" required minlength="2" maxlength="200">
+          <span class="popup__input-error" id="description-error"></span>
         </div>
         <button class="popup__save-button" type="submit">Сохранить</button>
       </form>
@@ -58,15 +60,17 @@
   <div class="popup popup_add">
     <div class="popup__container">
       <button class="popup__close-button" type="button" aria-label="Закрыть окно"></button>
-      <h2 class="popup__title">Новое место</h2>
       <form class="popup__form popup__form_add" name="form-name" autocomplete="on">
+        <h2 class="popup__title">Новое место</h2>
         <div class="popup__section">
-          <input class="popup__input popup__input_type_title" type="text" name="title" id="title" placeholder="Название" required minlength="2" maxlength="30">
-          <span class="popup__input-error popup__input-error_active"></span>
+          <input class="popup__input popup__input_type_title" type="text" name="title" id="title" placeholder="Название"
+            required minlength="2" maxlength="30">
+          <span class="popup__input-error"></span>
         </div>
         <div class="popup__section">
-          <input class="popup__input popup__input_type_link" type="url" name="link" id="link" placeholder="Ссылка на картинку" required>
-          <span class="popup__input-error popup__input-error_active"></span>
+          <input class="popup__input popup__input_type_link" type="url" name="link" id="link"
+            placeholder="Ссылка на картинку" required>
+          <span class="popup__input-error"></span>
         </div>
         <button class="popup__save-button" type="submit">Создать</button>
       </form>

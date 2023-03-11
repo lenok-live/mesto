@@ -12,14 +12,13 @@ const toggleInputState = (inputElement, options) => {
   const isValid = inputElement.validity.valid;
   const inputFormElement = inputElement.closest(options.inputSectionSelector);
   const errorElement = inputFormElement.querySelector(options.inputErrorSelector);
+
   if (isValid) {
     hidenError(errorElement, options.inputErrorClass);
   } else {
     showError(errorElement, inputElement.validationMessage, options.inputErrorClass);
   }
 };
-
-
 
 const enableButton = (buttonElement, disabledButtonClass) => {
   buttonElement.removeAttribute('disabled');
@@ -57,7 +56,8 @@ const setEventListeners = (form, options) => {
 
 const enableValidation = (options) => {
   const forms = Array.from(document.querySelectorAll(options.formSelector));
+
   forms.forEach(form => {
-  setEventListeners(form, options);
+    setEventListeners(form, options);
   });
 };

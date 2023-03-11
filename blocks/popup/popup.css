@@ -1,5 +1,5 @@
 .popup {
-  display: none;
+  box-sizing: border-box;
   position: fixed;
   left: 0;
   top: 0;
@@ -8,8 +8,8 @@
   align-items: center;
   justify-content: center;
   background-color: rgba(0, 0, 0, 0.5);
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s, opacity .5s linear;
 }
-/* opacity: 0;
-  transition-property: opacity, height;
-  transition-duration: 1s, 0s;
-  transition-delay: 0s, 1s;*/
+

@@ -48,23 +48,14 @@ const titleZoomImage = document.querySelector('.popup__title-img');
 const closeButtons = document.querySelectorAll('.popup__close-button');
 
 const options = {
-  formSelector: '.popup',
-  submitSelector: '.popup__save-button',
+  formSelector: '.popup__container',
   inputSelector: '.popup__input',
-  inputSectionSelector: '.popup__section',
+  submitSelector: '.popup__save-button',
+  disabledButtonClass: 'popup__save-button_inactive',
   inputErrorSelector: '.popup__input-error',
   inputErrorClass: 'popup__input-error_active',
-  disabledButtonClass: 'popup__save-button_inactive',
+  inputSectionSelector: '.popup__section',
 }
-
-//закрыть попап по нажатию на оверлей
-const popup = document.querySelectorAll('.popup').forEach(item => {
-  item.addEventListener('click', (evt) => {
-    if(evt.target === evt.currentTarget) {
-      closePopup(item)
-    }
-  })
-});
 
 //Воспроизвести карточки «из коробки»
 function renderCards(items) {
@@ -78,12 +69,31 @@ renderCards(initialCards);
 //Открыть попап
 function openPopup (item) {
   item.classList.add('popup_opened');
+  document.addEventListener('keydown', closePopupEsc);
 }
 
 //Закрыть попап
 function closePopup (item) {
   item.classList.remove('popup_opened');
+  document.removeEventListener('keydown', closePopupEsc);
 }
+
+//Закрыть попап кнопкой Esc
+function closePopupEsc (item) {
+  if(item.key === 'Escape') {
+    const popupOpened = document.querySelector('.popup_opened');
+    closePopup(popupOpened);
+  }
+}
+
+//закрыть попап по нажатию на оверлей
+const popup = document.querySelectorAll('.popup').forEach(item => {
+  item.addEventListener('click', (evt) => {
+    if(evt.target === evt.currentTarget) {
+      closePopup(item)
+    }
+  })
+});
 
 //Сохранить форму обработки
 function handleFormSubmit (evt) {
