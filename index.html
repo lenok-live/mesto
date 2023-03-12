@@ -45,12 +45,12 @@
         <h2 class="popup__title">Редактировать профиль</h2>
         <div class="popup__section">
           <input class="popup__input popup__input_type_name" type="text" name="name" id="name" placeholder="Имя"
-            required minlength="2" maxlength="40">
+            required minlength="2" maxlength="40" novalidate>
           <span class="popup__input-error" id="username-error"></span>
         </div>
         <div class="popup__section">
           <input class="popup__input popup__input_type_profession" type="text" name="job" id="job"
-            placeholder="Профессия" required minlength="2" maxlength="200">
+            placeholder="Профессия" required minlength="2" maxlength="200" novalidate>
           <span class="popup__input-error" id="description-error"></span>
         </div>
         <button class="popup__save-button" type="submit">Сохранить</button>
@@ -64,12 +64,12 @@
         <h2 class="popup__title">Новое место</h2>
         <div class="popup__section">
           <input class="popup__input popup__input_type_title" type="text" name="title" id="title" placeholder="Название"
-            required minlength="2" maxlength="30">
+            required minlength="2" maxlength="30" novalidate>
           <span class="popup__input-error"></span>
         </div>
         <div class="popup__section">
           <input class="popup__input popup__input_type_link" type="url" name="link" id="link"
-            placeholder="Ссылка на картинку" required>
+            placeholder="Ссылка на картинку" required novalidate>
           <span class="popup__input-error"></span>
         </div>
         <button class="popup__save-button" type="submit">Создать</button>

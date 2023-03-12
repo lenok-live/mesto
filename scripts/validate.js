@@ -1,22 +1,27 @@
-const hidenError = (errorElement, inputErrorClass) => {
+//скрыть ошибка
+const hidenError = (errorElement, options, inputElement) => {
   errorElement.innerText = '';
-  errorElement.classList.remove(inputErrorClass);
+  errorElement.classList.remove(options.inputErrorClass);
+  inputElement.classList.remove(options.inputInvalidClass);
 };
 
-const showError = (errorElement, message, inputErrorClass) => {
+//показать ошибку
+const showError = (errorElement, message, options, inputElement) => {
   errorElement.innerText = message;
-  errorElement.classList.add(inputErrorClass);
+  errorElement.classList.add(options.inputErrorClass);
+  inputElement.classList.add(options.inputInvalidClass);
 };
 
+//переключить состояние ввода
 const toggleInputState = (inputElement, options) => {
   const isValid = inputElement.validity.valid;
   const inputFormElement = inputElement.closest(options.inputSectionSelector);
   const errorElement = inputFormElement.querySelector(options.inputErrorSelector);
 
   if (isValid) {
-    hidenError(errorElement, options.inputErrorClass);
+    hidenError(errorElement, options, inputElement);
   } else {
-    showError(errorElement, inputElement.validationMessage, options.inputErrorClass);
+    showError(errorElement, inputElement.validationMessage, options, inputElement);
   }
 };
 
@@ -30,7 +35,6 @@ const disableButton = (buttonElement, disabledButtonClass) => {
   buttonElement.classList.add(disabledButtonClass);
 };
 
-//скрыть или отобразить ошибку инпута
 const toggleButtonState = (inputs, submitElement, disabledButtonClass) => {
   const formIsValid = inputs.every(inputElement => inputElement.validity.valid);
 

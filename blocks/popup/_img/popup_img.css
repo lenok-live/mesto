@@ -1,11 +1,4 @@
 .popup_img {
   background-color: rgba(0, 0, 0, 0.9);
-  align-items: flex-start;
-  padding-top: 90px;
 }
 
-@media screen and (max-width: 720px) {
-  .popup_img {
-    padding-top: 136px;
-  }
-}

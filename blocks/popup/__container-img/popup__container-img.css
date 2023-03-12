@@ -1,5 +1,6 @@
 .popup__container-img {
-  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
   position: relative;
-  max-height: 540px;
-}
+ }
