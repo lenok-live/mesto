@@ -1,32 +1,7 @@
+import { initialCards, options } from './constants.js';
 import Card from './Card.js';
 import FormValidator from './FormValidator.js';
 
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
 
 const elementsContainer = document.querySelector('.elements'); // тег внутрь которого вставляем карточки с использованием шаблона template
 
@@ -46,30 +21,20 @@ const addCardPopup = document.querySelector('.popup_add');
 const openImage = document.querySelector('.popup_img');
 const zoomImage = document.querySelector('.popup__img');
 const titleBigImage = document.querySelector('.popup__title-img');
-const closeButton = document.querySelectorAll('.popup__close-button');
-
-const options = {
-  formSelector: '.popup__container', //.popup__form
-  inputSelector: '.popup__input',
-  submitSelector: '.popup__save-button',
-  disabledButtonClass: 'popup__save-button_inactive',
-  inputErrorSelector: '.popup__input-error',
-  inputErrorClass: 'popup__input-error_active', //
-  inputSectionSelector: '.popup__section',
-  inputInvalidClass: 'popup__input_invalid' 
-};
+const closeButtons = document.querySelectorAll('.popup__close-button');
 
 //создать карточку
 const createCard = (...args) => {
   return new Card(...args).generateCard();
 };
 //валидация формы редактирования
-const validationFormEdit = new FormValidator(options, profileEditForm);
-validationFormEdit.enableValidation();
+const validatorFormEdit = new FormValidator(options, profileEditForm);
+validatorFormEdit.enableValidation();
 
-//валидауия формы добавления карточки
-const validationFormAdd = new FormValidator(options, createCardForm);
-validationFormAdd.enableValidation();
+//валидация формы добавления карточки
+const validatorFormAdd = new FormValidator(options, createCardForm);
+validatorFormAdd.enableValidation();
+//validatorFormAdd.toggleButtonState();
 
 //воспроизвести карточки «из коробки»
 function renderCards(items) {
@@ -88,9 +53,8 @@ function addNewCard (evt) {
   const linkName = inputLink.value;
   const card = createCard ({name: titleName, link: linkName}, '#card-template', handleCardClick);
   evt.target.reset();
-  evt.submitter.classList.add('popup__save-button_inactive');
-  evt.submitter.disabled = true;
-
+  // evt.submitter.classList.add('popup__save-button_inactive');
+  // evt.submitter.disabled = true;
   elementsContainer.prepend(card);
   closePopup(addCardPopup);
 };
@@ -108,8 +72,8 @@ function closePopup (item) {
 };
 
 //закрыть попап кнопкой Esc
-function closePopupEsc (item) {
-  if(item.key === 'Escape') {
+function closePopupEsc (event) {
+  if(event.key === 'Escape') {
     const popupOpened = document.querySelector('.popup_opened');
     closePopup(popupOpened);
   }
@@ -125,7 +89,7 @@ document.querySelectorAll('.popup').forEach(item => {
 });
 
 //сохранить форму редактирования
-function handleFormSubmit (evt) {
+function saveProfileEditForm (evt) {
   evt.preventDefault();
   profTitle.textContent = nameInput.value;
   profSubtitle.textContent = jobInput.value;
@@ -148,7 +112,7 @@ profileEditButton.addEventListener('click', () => {
 });
 
 //сохранить редактирование профиля
-profileEditForm.addEventListener('submit', handleFormSubmit);
+profileEditForm.addEventListener('submit', saveProfileEditForm);
 
 //открыть форму добавления карточки
 addCardButton.addEventListener('click', () => openPopup (addCardPopup));
@@ -157,7 +121,7 @@ addCardButton.addEventListener('click', () => openPopup (addCardPopup));
 createCardForm.addEventListener('submit', addNewCard);
 
 //закрыть popup
-closeButton.forEach((button) => {
+closeButtons.forEach((button) => {
   const popup = button.closest('.popup');
   button.addEventListener('click', () => closePopup(popup));
 });

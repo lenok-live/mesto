@@ -41,22 +41,25 @@ export default class Card {
     return this._element;
   }
 
-
+  //удалить по клику
   _handleDeleteClick() {
-    this._cardDelete.closest('.element').remove();
+    this._element.remove();
+  }
+  
+  //поставить лайк
+  _toggleLike() {
+    this._like.classList.toggle('element__btn-like_active')
   }
 
   _setEventListener() {
-    //лайк на карточку
-    this._like.addEventListener('click', () => {
-      if (this._like.classList.contains('element__btn-like')) {
-        this._like.classList.toggle('element__btn-like_active')
-      }
-    });
-
     //удаление карточки
     this._cardDelete.addEventListener('click', () => {
       this._handleDeleteClick();
+    });
+
+    //лайк на карточку
+    this._like.addEventListener('click', () => {
+      this._toggleLike();
     });
 
     //открытие изображения на весь экран
