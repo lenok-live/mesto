@@ -3,13 +3,14 @@
 
 export default class Popup {
   constructor(popupSelector) {
-    this._popup = popupSelector;
+    this._popup = document.querySelector(popupSelector);
   }
 
   //открытие попапа
   open() {
     this._popup.classList.add('popup_opened');
-    document.addEventListener('keydown', this._handleEscClose);
+    this.setEventListeners();
+    // document.addEventListener('keydown', this._handleEscClose);
   }
 
   //закрытие попапа
@@ -21,13 +22,18 @@ export default class Popup {
   //логика закрытия попапа клавишей Esc
   _handleEscClose = (event) => {
     if(event.key === 'Escape') {
-    //?const popupOpened = document.querySelector('.popup_opened');
       this.close();
     }
   }
 
   //метод, который добавляет слушатель клика иконке закрытия попапа
   setEventListeners() {
+    document.addEventListener('keydown', this._handleEscClose);
 
+    this._popup.addEventListener('click', (e) => {
+      if (e.target.classList.contains('popup__close-button') || e.target === this._popup) {
+        this.close();
+      }
+    })
   }
 }

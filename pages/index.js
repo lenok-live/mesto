@@ -3,22 +3,23 @@ import { initialCards, options, elementsContainer, profTitle, profSubtitle, addC
   createCardForm, addCardPopup, openImage, zoomImage, titleBigImage, closeButtons } from '../utils/constants.js';
 import Card from '../components/Card.js';
 import PopupWithForm from '../components/PopupWithForm.js';
+import PopupWithImage from '../components/PopupWithImage.js';
 import FormValidator from '../components/FormValidator.js';
 import Section from '../components/Section.js';
-
+import Popup from '../components/Popup.js';
 
 //создать карточку
 const createCard = (...args) => {
   return new Card(...args).generateCard();
 };
 
-// const popupAvatarEdit = new PopupWithForm('popup_edit');
+const popupWithImage = new PopupWithImage('.popup_img');
+popupWithImage.setEventListeners();
 
-// object = {
-//   title: 'pp'
-//   link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-// }
-//const section = new Section()
+const popup = new Popup('.popup_edit');
+//const close = popup.close();
+
+
 //валидация формы редактирования
 const validatorFormEdit = new FormValidator(options, profileEditForm);
 validatorFormEdit.enableValidation();
@@ -38,6 +39,7 @@ const renderCards = new Section({
   }
 }, elementsContainer);
 renderCards.renderItems();
+
 
 
 // воспроизвести карточки «из коробки»
@@ -65,55 +67,60 @@ function addNewCard (evt) {
 
 
 //открыть попап
-function openPopup (item) {
-  item.classList.add('popup_opened');
-  document.addEventListener('keydown', closePopupEsc);
-};
+// function openPopup (item) {
+//   item.classList.add('popup_opened');
+//   document.addEventListener('keydown', closePopupEsc);
+// };
 
-//закрыть попап
-function closePopup (item) {
-  item.classList.remove('popup_opened');
-  document.removeEventListener('keydown', closePopupEsc);
-};
+// //закрыть попап
+// function closePopup (item) {
+//   item.classList.remove('popup_opened');
+//   document.removeEventListener('keydown', closePopupEsc);
+// };
 
-//закрыть попап кнопкой Esc
-function closePopupEsc (event) {
-  if(event.key === 'Escape') {
-    const popupOpened = document.querySelector('.popup_opened');
-    closePopup(popupOpened);
-  }
-};
+// //закрыть попап кнопкой Esc
+// function closePopupEsc (event) {
+//   if(event.key === 'Escape') {
+//     const popupOpened = document.querySelector('.popup_opened');
+//     closePopup(popupOpened);
+//   }
+// };
 
-//закрыть попап по нажатию на оверлей
-document.querySelectorAll('.popup').forEach(item => {
-  item.addEventListener('mousedown', (evt) => {
-    if(evt.target === evt.currentTarget) {
-      closePopup(item)
-    }
-  })
-});
+// //закрыть попап по нажатию на оверлей
+// document.querySelectorAll('.popup').forEach(item => {
+//   item.addEventListener('mousedown', (evt) => {
+//     if(evt.target === evt.currentTarget) {
+//       closePopup(item)
+//     }
+//   })
+// });
+
+
+const profileEditFormPopup = new PopupWithForm('.popup_edit', saveProfileEditForm)
+profileEditFormPopup.setEventListeners();
 
 //сохранить форму редактирования
-function saveProfileEditForm (evt) {
-  evt.preventDefault();
+function saveProfileEditForm () {
+  //evt.preventDefault();
   profTitle.textContent = nameInput.value;
   profSubtitle.textContent = jobInput.value;
-  closePopup(editProfilePopup);
+  popup.close();
 };
 
 function handleCardClick (link, name) {
-  zoomImage.src = link;
-  zoomImage.alt = name;
-  titleBigImage.textContent = name;
+  // zoomImage.src = link;
+  // zoomImage.alt = name;
+  // titleBigImage.textContent = name;
   
-  openPopup (openImage);
+  // openPopup (openImage);
+  popupWithImage.open(link, name)
 }
 
 //открыть форму редактирования профиля
 profileEditButton.addEventListener('click', () => {
   nameInput.value = profTitle.textContent;
   jobInput.value = profSubtitle.textContent;
-  openPopup (editProfilePopup);
+  profileEditFormPopup.open();
 });
 
 //сохранить редактирование профиля

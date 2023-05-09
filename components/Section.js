@@ -18,7 +18,6 @@ export default class Section {
   }
 
   //метод, который отвечает за отрисовку всех элементов 
-  //отрисовка каждого отдельного элемента должна осуществляться функцией renderer
   renderItems() {
     this._items.forEach((item) => {
       this._renderer(item)});
