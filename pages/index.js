@@ -1,32 +1,24 @@
-import { initialCards, options } from './constants.js';
-import Card from './Card.js';
-import FormValidator from './FormValidator.js';
+import { initialCards, options, elementsContainer, profTitle, profSubtitle, addCardButton,
+  profileEditButton, inputTitle, inputLink, jobInput, nameInput, editProfilePopup, profileEditForm,
+  createCardForm, addCardPopup, openImage, zoomImage, titleBigImage, closeButtons } from '../utils/constants.js';
+import Card from '../components/Card.js';
+import PopupWithForm from '../components/PopupWithForm.js';
+import FormValidator from '../components/FormValidator.js';
+import Section from '../components/Section.js';
 
-
-const elementsContainer = document.querySelector('.elements'); // тег внутрь которого вставляем карточки с использованием шаблона template
-
-const profTitle = document.querySelector('.profile__title');
-const profSubtitle = document.querySelector('.profile__subtitle');
-const addCardButton = document.querySelector('.profile__button');
-const profileEditButton = document.querySelector('.profile__open-popup');
-
-const inputTitle  = document.querySelector('.popup__input_type_title');
-const inputLink = document.querySelector('.popup__input_type_link');
-const jobInput = document.querySelector('.popup__input_type_profession');
-const nameInput = document.querySelector('.popup__input_type_name');
-const editProfilePopup = document.querySelector('.popup_edit');
-const profileEditForm = document.querySelector('.popup__form_edit');
-const createCardForm = document.querySelector('.popup__form_add');
-const addCardPopup = document.querySelector('.popup_add');
-const openImage = document.querySelector('.popup_img');
-const zoomImage = document.querySelector('.popup__img');
-const titleBigImage = document.querySelector('.popup__title-img');
-const closeButtons = document.querySelectorAll('.popup__close-button');
 
 //создать карточку
 const createCard = (...args) => {
   return new Card(...args).generateCard();
 };
+
+// const popupAvatarEdit = new PopupWithForm('popup_edit');
+
+// object = {
+//   title: 'pp'
+//   link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+// }
+//const section = new Section()
 //валидация формы редактирования
 const validatorFormEdit = new FormValidator(options, profileEditForm);
 validatorFormEdit.enableValidation();
@@ -34,16 +26,28 @@ validatorFormEdit.enableValidation();
 //валидация формы добавления карточки
 const validatorFormAdd = new FormValidator(options, createCardForm);
 validatorFormAdd.enableValidation();
-//validatorFormAdd.toggleButtonState();
+validatorFormAdd.toggleButtonState();
 
-//воспроизвести карточки «из коробки»
-function renderCards(items) {
- const cards = items.map((item) => {
-   return createCard(item, '#card-template', handleCardClick);
- });
- elementsContainer.append(...cards);
-};
-renderCards(initialCards);
+//визуализировать карты из массива
+const renderCards = new Section({ 
+  items: initialCards, 
+  renderer: (item) => {
+    const card = createCard(item, '#card-template', handleCardClick);
+    //const cardElement = card.generateCard();
+    renderCards.addItem(card);
+  }
+}, elementsContainer);
+renderCards.renderItems();
+
+
+// воспроизвести карточки «из коробки»
+// function renderCards(items) {
+//  const cards = items.map((item) => {
+//    return createCard(item, '#card-template', handleCardClick);
+//  });
+//  elementsContainer.append(...cards);
+// };
+// renderCards(initialCards);
 
 //добавить новую карточку
 function addNewCard (evt) {
@@ -58,6 +62,7 @@ function addNewCard (evt) {
   elementsContainer.prepend(card);
   closePopup(addCardPopup);
 };
+
 
 //открыть попап
 function openPopup (item) {

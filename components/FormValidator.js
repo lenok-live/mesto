@@ -46,7 +46,7 @@ export default class FormValidator {
   }
 
   //состояние кнопки при валидации
-  _toggleButtonState() {
+  toggleButtonState() {
     const formIsValid = this._inputList.every(inputElement => inputElement.validity.valid);
     
     if (formIsValid) {
@@ -62,9 +62,9 @@ export default class FormValidator {
      this._inputList.forEach((inputElement) => {
       inputElement.addEventListener('input', () => {
         this._toggleInputState(inputElement);
-        this._toggleButtonState();
+        this.toggleButtonState();
       });
     });
-    this._toggleButtonState();
+    this.toggleButtonState();
   }
 }
