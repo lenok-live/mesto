@@ -3,7 +3,6 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./pages/index.css" />
     <title>Mesto</title>
   </head>
 
@@ -11,13 +10,13 @@
     <header class="header">
       <img
         class="header__logo"
-        src="./images/logo/logo.svg"
+        src="<%=require('./images/logo/logo.svg')%>"
         alt="Логотип Место"
       />
     </header>
     <main class="content">
       <section class="profile">
-        <img class="profile__avatar" src="./images/ava.jpg" alt="Аватарка" />
+        <img class="profile__avatar" src="<%=require('./images/ava.jpg')%>" alt="Аватарка" />
         <div class="profile__info">
           <h1 class="profile__title">Жак-Ив Кусто</h1>
           <button
@@ -71,7 +70,7 @@
             <input
               class="popup__input popup__input_type_name"
               type="text"
-              name="name"
+              name="type-name"
               id="popup__input-name"
               placeholder="Имя"
               required
@@ -117,7 +116,7 @@
             <input
               class="popup__input popup__input_type_title"
               type="text"
-              name="title"
+              name="name"
               id="popup__input-title"
               placeholder="Название"
               required
@@ -155,7 +154,5 @@
         <h2 class="popup__title-img"></h2>
       </div>
     </div>
-
-    <script type="module" src="./pages/index.js"></script>
   </body>
 </html>
