@@ -9,7 +9,7 @@ export default class Popup {
   //открытие попапа
   open() {
     this._popup.classList.add('popup_opened');
-    this.setEventListeners();
+    document.addEventListener('keydown', this._handleEscClose);
   }
 
   //закрытие попапа
@@ -27,8 +27,6 @@ export default class Popup {
 
   //метод, который добавляет слушатель клика иконке закрытия попапа
   setEventListeners() {
-    document.addEventListener('keydown', this._handleEscClose);
-
     this._popup.addEventListener('mousedown', (e) => {
       if (e.target.classList.contains('popup__close-button') || e.target === this._popup) {
         this.close();

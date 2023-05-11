@@ -57,6 +57,14 @@ export default class FormValidator {
       this._buttonElement.classList.add(this._options.disabledButtonClass);
     }
   }
+  
+  //метод очищает все ошибки валидации, а кнопка устанавливается в необходимое состояние
+  resetValidation() {
+    this._inputList.forEach((input) => {
+      this._hidenError(input)
+    })
+    this.toggleButtonState()
+  }
 
   _setEventListeners() {
      this._inputList.forEach((inputElement) => {

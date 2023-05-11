@@ -26,24 +26,26 @@ const createCard = (...args) => {
 };
 
 //визуализировать карты из массива
-const renderCards = new Section({ 
-  items: initialCards, 
+const cardsSection = new Section({ 
+  //items: initialCards, 
   renderer: (item) => {
     const card = createCard(item, '#card-template', handleCardClick);
 
-    renderCards.addItem(card);
+    cardsSection.addItem(card);
   }
 }, elementsContainer);
-renderCards.renderItems();
+cardsSection.renderItems(initialCards);
 
 //валидация формы редактирования
 const validatorFormEdit = new FormValidator(options, profileEditForm);
 validatorFormEdit.enableValidation();
+validatorFormEdit.resetValidation();
 
 //валидация формы добавления карточки
 const validatorFormAdd = new FormValidator(options, createCardForm);
 validatorFormAdd.enableValidation();
-validatorFormAdd.toggleButtonState();
+//validatorFormAdd.toggleButtonState();
+validatorFormAdd.resetValidation();
 
 //всплывающее окно с изображением
 const popupWithImage = new PopupWithImage('.popup_img');
@@ -55,6 +57,7 @@ profileEditFormPopup.setEventListeners();
 
 //всплывающее окно формы добавления карты
 const cardAddFormPopup = new PopupWithForm('.popup_add', saveFormAddCard);
+cardAddFormPopup.setEventListeners();
  
 //колбэк сабмита формы редактирования профиля
 function saveProfileEditForm() {
@@ -65,7 +68,7 @@ function saveProfileEditForm() {
 //колбэк сабмита формы добавления карточки
 function saveFormAddCard(data) {
   const card = createCard (data, '#card-template', handleCardClick);
-  renderCards.addItem(card);
+  cardsSection.addItem(card);
   cardAddFormPopup.close();
 }
 
@@ -79,7 +82,7 @@ profileEditButton.addEventListener('click', () => {
   const profile = userInfo.getUserInfo();
   nameInput.value = profile.name;
   jobInput.value = profile.about;
-  profileEditFormPopup.open();
+  profileEditFormPopup.open();  ;
 });
 
 //открыть форму добавления карточки

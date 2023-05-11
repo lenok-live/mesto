@@ -44,6 +44,7 @@ export default class Card {
   //удалить по клику
   _handleDeleteClick() {
     this._element.remove();
+    this._element = null;
   }
   
   //поставить лайк
