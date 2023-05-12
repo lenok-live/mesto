@@ -39,13 +39,11 @@ cardsSection.renderItems(initialCards);
 //валидация формы редактирования
 const validatorFormEdit = new FormValidator(options, profileEditForm);
 validatorFormEdit.enableValidation();
-validatorFormEdit.resetValidation();
 
 //валидация формы добавления карточки
 const validatorFormAdd = new FormValidator(options, createCardForm);
 validatorFormAdd.enableValidation();
-//validatorFormAdd.toggleButtonState();
-validatorFormAdd.resetValidation();
+validatorFormAdd.toggleButtonState();
 
 //всплывающее окно с изображением
 const popupWithImage = new PopupWithImage('.popup_img');
@@ -82,8 +80,12 @@ profileEditButton.addEventListener('click', () => {
   const profile = userInfo.getUserInfo();
   nameInput.value = profile.name;
   jobInput.value = profile.about;
-  profileEditFormPopup.open();  ;
+  profileEditFormPopup.open();
+  validatorFormEdit.resetValidation();
 });
 
 //открыть форму добавления карточки
-addCardButton.addEventListener('click', () => cardAddFormPopup.open());
+addCardButton.addEventListener('click', () => {
+  cardAddFormPopup.open();
+  validatorFormAdd.resetValidation();
+});
