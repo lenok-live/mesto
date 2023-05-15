@@ -18,7 +18,7 @@ export default class PopupWithForm extends Popup {
     this._inputList = Array.from(this._form.querySelectorAll('.popup__input'));
   }
 
-  _getInputValue() {
+  _getInputValues() {
     this._formValues = {};
     this._inputList.forEach((input) => {
       this._formValues[input.name] = input.value;
@@ -32,13 +32,26 @@ export default class PopupWithForm extends Popup {
     this._form.reset();
   }
 
-  _handleSubmitClick = (e) => {
-    e.preventDefault();
-    this._handleFormSubmit(this._getInputValue())
-  }
+  // _handleSubmitClick() {
+  //   //e.preventDefault();
+  //   this._handleFormSubmit(this._getInputValues())
+  // }
 
   setEventListeners() {
     super.setEventListeners();
-    this._form.addEventListener('submit', this._handleSubmitClick);
+
+    this._form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      // перед запросом сохраняем изначальный текст кнопки
+      this._submitButton = this._popup.querySelector('.popup__save-button');
+      const initialText = this._submitButton.textContent;
+      // меняем его, чтобы показать пользователю ожидание
+      this._submitButton.textContent = 'Сохранение...';
+      this._handleFormSubmit(this._getInputValues())
+        .then(() => this.close()) // закрывается попап в `then`
+        .finally(() => {
+          this._submitButton.textContent = initialText;
+        }) // в любом случае меняется текст кнопки обратно на начальный в `finally`
+    });
   }
 }

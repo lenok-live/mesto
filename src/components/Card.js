@@ -37,14 +37,15 @@ export default class Card {
   //создаем карточку
   generateCard() {
     this._element = this._getTemplate();
+    this._likeCounter = this._element.querySelector('.element__like-counter');
 
-    this._element.querySelector('.element__like-counter').textContent = this._likes.length;
+    this._likeCounter.textContent = this._likes.length;
 
     this.updateLikes(this._likes);
     this._setEventListener();
 
     if (this._myId !== this._cardOwnerId) {
-      this._element.querySelector('.element__btn-trash').classList.add('element__btn-trash_hide')
+      this._cardDelete.classList.add('element__btn-trash_hide')
     }
 
     this._cardImage.src = this._link;
@@ -72,11 +73,11 @@ export default class Card {
 
   updateLikes(likes) {
     this._likes = likes;
-    this._element.querySelector('.element__like-counter').textContent = likes.length;
+    this._likeCounter.textContent = likes.length;
     if (this.getIsLiked()) {
-      this._element.querySelector('.element__btn-like').classList.add('element__btn-like_active')
+      this._like.classList.add('element__btn-like_active')
     } else {
-      this._element.querySelector('.element__btn-like').classList.remove('element__btn-like_active')
+      this._like.classList.remove('element__btn-like_active')
     }
   }
 

@@ -25,13 +25,13 @@ const profileEditForm = document.querySelector('.popup__form_edit');
 const createCardForm = document.querySelector('.popup__form_add');
 const updateAvatarForm = document.querySelector('.popup__form_avatar');
 
-const addCardPopup = document.querySelector('.popup_add').querySelector('.popup__save-button');
-const editProfilePopup = document.querySelector('.popup_edit').querySelector('.popup__save-button');
-const editAvatarPopup = document.querySelector('.popup_avatar').querySelector('.popup__save-button');
+// const addCardPopup = document.querySelector('.popup_add').querySelector('.popup__save-button');
+// const editProfilePopup = document.querySelector('.popup_edit').querySelector('.popup__save-button');
+// const editAvatarPopup = document.querySelector('.popup_avatar').querySelector('.popup__save-button');
 
 export { options, elementsContainer, profTitle, profSubtitle, profileAvatar, editAvatar, addCardButton,
 profileEditButton, jobInput, nameInput, profileEditForm,
-createCardForm, addCardPopup, updateAvatarForm, editProfilePopup, editAvatarPopup };
+createCardForm, updateAvatarForm };
 
 
 // const initialCards = [

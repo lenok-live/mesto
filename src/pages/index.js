@@ -2,8 +2,7 @@ import './index.css';
 
 import { options, elementsContainer, profTitle, profSubtitle, profileAvatar, 
   editAvatar, addCardButton, profileEditButton, jobInput, nameInput, 
-  profileEditForm, createCardForm, updateAvatarForm, editProfilePopup, 
-  addCardPopup, editAvatarPopup } from '../utils/constants.js';
+  profileEditForm, createCardForm, updateAvatarForm } from '../utils/constants.js';
 import Card from '../components/Card.js';
 import UserInfo from '../components/UserInfo.js';
 import FormValidator from '../components/FormValidator.js';
@@ -13,7 +12,7 @@ import PopupWithForm from '../components/PopupWithForm.js';
 import PopupWithConfirm from '../components/PopupWithConfirm.js';
 
 import { api } from '../components/Api.js';
-import downloadProcess from '../utils/downloadProcess';
+// import downloadProcess from '../utils/downloadProcess';
 
 // input -> html
 // input -> api -> html
@@ -25,7 +24,7 @@ Promise.all([
 ]).then(([profileData, cards]) => {
   setInitialProfileData(profileData)
   cardsSection.renderItems(cards.reverse());
-})
+}).catch((error) => console.log(error))
 
 //отображением информации о пользователе на странице
 const userInfo = new UserInfo({
@@ -49,9 +48,11 @@ const createCard = (cardData) => {
 function handleLikeCard(cardElement) {
   const cardId = cardElement.getId();
   const isLiked = cardElement.getIsLiked();
-  api.updateLike(cardId, isLiked).then((updatedCard) => {
+  api.updateLike(cardId, isLiked)
+  .then((updatedCard) => {
     cardElement.updateLikes(updatedCard.likes)
   })
+  .catch(console.error)
 }
 
 // отрисовка карточки
@@ -104,25 +105,27 @@ confirmPopup.setEventListeners();
 
 //колбэк формы редактирования аватара
 function handleUpdateAvatar(inputValues) {
-  downloadProcess(true, editAvatarPopup);
-  api.updateAvatar(inputValues).then((updatedProfile) => {
-    userInfo.setUserInfo(updatedProfile)
-  }).catch(console.error)
-  .finally(() => {
-    avatarProfilePopup.close();
-    downloadProcess(true, editAvatarPopup);
+  //downloadProcess(true, editAvatarPopup);
+  return api.updateAvatar(inputValues)
+  .then((updatedProfile) => {
+    userInfo.setUserInfo(updatedProfile);
+    //avatarProfilePopup.close(); //закрывается в методе setEventListeners в классе PopupWithForm
   })
+  .catch((error) => console.log(error))
+  // .finally(() => {
+  //   downloadProcess(false, editAvatarPopup)
+  // })
 }
 
 //submit confirmForm
 function handleConfirmDeleteCardClick(cardElement) {
-  const cardId = cardElement.getId()
-  api.deleteCard(cardId).then(() => {
-    cardElement.remove()
-  }).catch(console.error)
-  .finally(() => {
+  const cardId = cardElement.getId();
+  api.deleteCard(cardId)
+  .then(() => {
+    cardElement.remove();
     confirmPopup.close()
   })
+  .catch((error) => console.log(error))
 }
 
 //по клику на корзину
@@ -132,37 +135,35 @@ function handleConfirmDeletingCard(element) {
  
 //колбэк сабмита формы редактирования профиля
 function saveProfileEditForm() {
-  downloadProcess(true, editProfilePopup)
-  api.updateProfile({
+  //downloadProcess(true, editProfilePopup)
+  return api.updateProfile({
     name: nameInput.value,
     about: jobInput.value
-  }).then((updatedProfile) => {
+  })
+  .then((updatedProfile) => {
     userInfo.setUserInfo({
       name: updatedProfile.name,
-      about: updatedProfile.about
-    });profileEditFormPopup.close();
-  }).finally(() => 
-    downloadProcess(true, editProfilePopup)
-  )
-
-  // userInfo.setUserInfo({name: nameInput.value, job: jobInput.value})
-  // popup.close();
+      about: updatedProfile.about});
+      //profileEditFormPopup.close(); //закрывается в методе setEventListeners в классе PopupWithForm
+  })
+  .catch((error) => console.log(error))
+  // .finally(() => {
+  //   downloadProcess(false, editProfilePopup)
+  // })
 };
 
 //колбэк сабмита формы добавления карточки
 function saveFormAddCard(data) {
-  downloadProcess(true, addCardPopup);
-  api.createCard(data)
+ // downloadProcess(true, addCardPopup);
+ return api.createCard(data)
   .then((newCard) => {
     renderCard(newCard);
-    cardAddFormPopup.close();
+    //cardAddFormPopup.close(); //закрывается в методе setEventListeners в классе PopupWithForm
   })
-  .catch((error) => {
-    console.log(error)
-  })
-  .finally(() => {
-    downloadProcess(true, addCardPopup)
-  })
+  .catch((error) => console.log(error))
+  // .finally(() => {
+  //   downloadProcess(false, addCardPopup)
+  // })
 }
 
 //открыть попап с картинкой при клике на карточку
