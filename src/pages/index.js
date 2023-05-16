@@ -1,8 +1,8 @@
 import './index.css';
 
 import { options, elementsContainer, profTitle, profSubtitle, profileAvatar, 
-  editAvatar, addCardButton, profileEditButton, jobInput, nameInput, 
-  profileEditForm, createCardForm, updateAvatarForm } from '../utils/constants.js';
+  editAvatar, addCardButton, profileEditButton,  profileEditForm, createCardForm, 
+  updateAvatarForm } from '../utils/constants.js';
 import Card from '../components/Card.js';
 import UserInfo from '../components/UserInfo.js';
 import FormValidator from '../components/FormValidator.js';
@@ -171,8 +171,9 @@ function handleCardClick (link, name) {
 //открыть форму редактирования профиля
 profileEditButton.addEventListener('click', () => {
   const profile = userInfo.getUserInfo();
-  nameInput.value = profile.name;
-  jobInput.value = profile.about;
+  profileEditFormPopup.setInputValues(profile);
+  // nameInput.value = profile.name;
+  // jobInput.value = profile.about;
   profileEditFormPopup.open();
   validatorFormEdit.resetValidation();
 });

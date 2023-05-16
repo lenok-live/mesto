@@ -27,7 +27,6 @@ export default class Card {
     .querySelector('.element')
     .cloneNode(true);
 
-    this._cardDelete = cardElement.querySelector('.element__btn-trash');
     this._like = cardElement.querySelector('.element__btn-like');
     this._cardImage = cardElement.querySelector('.element__image');
     
@@ -38,6 +37,7 @@ export default class Card {
   generateCard() {
     this._element = this._getTemplate();
     this._likeCounter = this._element.querySelector('.element__like-counter');
+    this._cardDelete = this._element.querySelector('.element__btn-trash');
 
     this._likeCounter.textContent = this._likes.length;
 
