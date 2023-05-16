@@ -134,19 +134,16 @@ function handleConfirmDeletingCard(element) {
 }
  
 //колбэк сабмита формы редактирования профиля
-function saveProfileEditForm() {
+function saveProfileEditForm(data) {
   //downloadProcess(true, editProfilePopup)
-  return api.updateProfile({
-    name: nameInput.value,
-    about: jobInput.value
-  })
-  .then((updatedProfile) => {
-    userInfo.setUserInfo({
-      name: updatedProfile.name,
-      about: updatedProfile.about});
+  return api.updateProfile(data)
+  .then((res) => {
+    userInfo.setUserInfo(res);
       //profileEditFormPopup.close(); //закрывается в методе setEventListeners в классе PopupWithForm
   })
-  .catch((error) => console.log(error))
+  .catch((error) => {
+    console.log(error)
+  })
   // .finally(() => {
   //   downloadProcess(false, editProfilePopup)
   // })
